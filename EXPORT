@@ -1,0 +1,1 @@
+mysqldump -u gotlandskaninen -pkanjaglaga gotlandskaninen kanin_g2013_average_mk kanin_g2013_founders kanin_g2013_kinship kanin_g2013_register > dump.sql

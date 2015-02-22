@@ -1,0 +1,87 @@
+
+Slopa "bogon" som företeelse i databasen. Allt sådant skall vara rättat
+innan man börjar räkna. Lägg till bogonkollen i sanity.
+
+Problem: 
+
+---
+
+Reducera antalet script radikalt. Allt i Lib reduceras till lib.sh och config.sh. Allt utom
+unik konfig i import_blah.sh skall in i lib.sh.
+
+Försök förenkla import_blah.php också.
+
+---
+
+Bryt ut all konfiguration i import_blah.sh till en konfigurationsfil som heter som $table_prefix.
+
+import.sh table_prefix.cfg
+
+Konfigurationsfilen skall då heta table_prefix.cfg. $table_prefix skall vara table_prefix.
+Avsikten med detta är att undvika misstag och överskrivningar i databasen.
+
+Borde jag inte sluta arbeta i projektkatalogen? Bättre att ha indata, konfiguration och
+utdata samlat. Så:
+
+cd Djur/Kanin/Register/Mellerudskanin/2013
+~/Djur/Kanin/Register/import.sh -c kanin_m2013.cfg
+
+Lägg till this_year.
+
+Skapa Lib och Log i arbetskatalogen om de inte redan finns.
+
+---
+
+Beräkna föräldradjurens ålder. Hur gör man det?
+
+select r.nummer, r.namn, r.fodd, r.mor_nr, r.mor, r.far_nr, r.far
+from kanin_g2013_register r
+limit 10;
+
+select r.nummer, r.namn, r.fodd,
+m.nummer, m.namn, m.fodd, datediff(r.fodd, m.fodd) alder_mor,
+f.nummer, f.namn, f.fodd, datediff(r.fodd, f.fodd) alder_far
+from kanin_g2013_register r
+join kanin_g2013_register m
+on r.mor_id = m.id
+join kanin_g2013_register f
+on r.far_id = f.id
+limit 10;
+
+select year(r.fodd) ar, max(datediff(r.fodd, m.fodd)) alder_mor, max(datediff(r.fodd, f.fodd)) alder_far
+from kanin_g2013_register r
+join kanin_g2013_register m
+on r.mor_id = m.id
+join kanin_g2013_register f
+on r.far_id = f.id
+group by ar
+order by ar;
+
+select r.nummer, r.namn, r.fodd,
+m.nummer, m.namn, m.fodd
+from kanin_g2013_register r
+join kanin_g2013_register m
+on r.mor_id = m.id
+where datediff(r.fodd, m.fodd) > 3000;
+
+
+Jag bör utesluta founders eftersom de har mindre tillförlitligt födelsedatum.
+
+select year(r.fodd) ar, max(datediff(r.fodd, m.fodd)) alder_mor, max(datediff(r.fodd, f.fodd)) alder_far
+from kanin_g2013_register r
+join kanin_g2013_register m
+on r.mor_id = m.id
+join kanin_g2013_register f
+on r.far_id = f.id
+group by ar
+order by ar;
+
+select year(r.fodd) År, round(avg(datediff(r.fodd, f.fodd))) Ålder
+from kanin_g2013_register r
+join kanin_g2013_register f
+on r.far_id = f.id
+where f.mor_id is not null
+group by År
+order by År;
+
+

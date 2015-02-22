@@ -1,0 +1,16 @@
+
+130614	Added generation depth to import script.
+	Do not import bogons.
+
+130422	Restructured import scripts into generic import.sh + config files.
+
+120826	Restored from backup after disk crash.
+	Translated from latin1 to utf8.
+
+100805	Added founders.php, a script to calculate founder distribution in the current population.
+
+100730	Renamed table: register => kanin_g_register (mellerud will be prefixed kanin_m)
+
+100727	Rewrote import.c in php. Version 0.2.0.
+
+100629	Moved project to new directory. Bumped version to 0.1.1.

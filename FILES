@@ -1,0 +1,30 @@
+
+Följande finns i Lib:
+
+config.sh
+create_register_php.sh
+create_schema.sh
+mk.sh
+patch.sh
+wright.sh
+
+
+---
+
+config.sh innehåller konfiguration samt några enkla funktioner. Anropas lite överallt
+där det behövs konfiguration.
+
+create_register_php.sh skapar webbapplikationen utifrån en mall. Anropas från
+importscriptet (t.ex. import_g2013a.sh).
+
+create_schema.sh skapar ett tomt schema. Anropas från importscriptet.
+
+mk.sh skapar årsstatistik över mean kinship. Anropas från importscriptet.
+
+patch.sh skapar patchscript utifrån mallar och anropar patchscripten.
+Anropas från importscripten.
+
+wright.sh skapar inavelsdata, kinshipdata och founderdata.
+Anropas från importscripten.
+
+

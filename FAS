@@ -1,0 +1,46 @@
+
+Man kan räkna ut Founder Alleles Surviving med mitt program.
+
+wright -u $$URL \
+	-v -t ${table_prefix}_register -i id -b fodd -d mor_id -s far_id \
+	-c ic \
+	-f "g2012 != '' and bogus is null"
+
+Exempel:
+
+ulric@ulrics-elitebook:~/Djur/Kanin/Register$ for f in `seq 2005 2012`; do echo Year $f; ./Lib/fas.sh kanin_m2013 $f; done
+Year 2005
+Total Alleles Surviving average of 10000 simulations: 7.81
+Year 2006
+Total Alleles Surviving average of 10000 simulations: 7.70
+Year 2007
+Total Alleles Surviving average of 10000 simulations: 15.62
+Year 2008
+Total Alleles Surviving average of 10000 simulations: 10.84
+Year 2009
+Total Alleles Surviving average of 10000 simulations: 11.14
+Year 2010
+Total Alleles Surviving average of 10000 simulations: 11.96
+Year 2011
+Total Alleles Surviving average of 10000 simulations: 11.57
+Year 2012
+Total Alleles Surviving average of 10000 simulations: 11.23
+ulric@ulrics-elitebook:~/Djur/Kanin/Register$ for f in `seq 2005 2012`; do echo Year $f; ./Lib/fas.sh kanin_g2013 $f; done
+Year 2005
+Total Alleles Surviving average of 10000 simulations: 57.34
+Year 2006
+Total Alleles Surviving average of 10000 simulations: 58.85
+Year 2007
+Total Alleles Surviving average of 10000 simulations: 56.50
+Year 2008
+Total Alleles Surviving average of 10000 simulations: 55.41
+Year 2009
+Total Alleles Surviving average of 10000 simulations: 53.38
+Year 2010
+Total Alleles Surviving average of 10000 simulations: 51.91
+Year 2011
+Total Alleles Surviving average of 10000 simulations: 50.94
+Year 2012
+Total Alleles Surviving average of 10000 simulations: 50.03
+
+

@@ -1,0 +1,17 @@
+#!/bin/sh
+
+. Lib/config.sh
+
+if test -z "$table_prefix"; then
+	echo "table_prefix empty" 1>&2
+	exit 1
+fi
+
+template=Template/${table_prefix}.sql
+
+if test ! -f "$template"; then
+	echo "template $template missing" 1>&2
+	exit 1
+fi
+
+templify < $template
