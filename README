@@ -1,0 +1,51 @@
+
+Programmet bygger på mitt gamla registerprogram från 2005, men är
+översatt från Scheme till PHP.
+
+För närvarande utförs inga dynamiska beräkningar, utan gången är:
+
+1. Anders skickar senaste versionen av excelfilen.
+2. Jag sparar om den som semikolonseparerad text.
+3. Ett program importerar den i databasen.
+4. Ett annat program beräknar inavelskoefficienter.
+5. Ytterligare beräkningar, t.ex. antal avkommor i registret.
+6. Beräkning av founders.
+
+Det finns kod för att knacka in djur i registret via webben, men
+den har jag disablat.
+
+---
+
+Programmet import.c läser kommaseparerad text och producerar sql
+som kan importeras i databasen.
+
+Programmet wright.php beräknar Wrights inavelskoefficient för alla
+djur i databasen.
+
+Scriptet offspring.sh uppdaterar antal avkommor.
+
+
+Usage:
+  wright [options]
+
+Options:
+  -u url         SDB url to access the database
+  -t table       The name of the table
+  -i id          The name of the primary key field
+  -b birth       The name of the birth field
+  -d dam         The name of the dam field
+  -s sire        The name of the sire field
+  -c coefficient The name of the coefficient field
+  -k kinship     The name of the mean kinship field
+  -n condition   Additional kinship selection argument
+  -v             Verbose
+  -h             Display this information
+
+Example:
+  wright -u mysql:uid=myusername:pwd=mypassword:db=mydatabase \
+	-t register -i id -b birth -d dam_id -s sire_id \
+	-c ic \
+	-n "g2008 != ''" -k mk2008 \
+	-n "g2009 != ''" -k mk2009
+
+Parameter order matters.
